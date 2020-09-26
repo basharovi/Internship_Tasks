@@ -25,7 +25,7 @@ using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System.ComponentModel;
 using System.Drawing;
-
+using WinForms = System.Windows.Forms;
 
 namespace WpfAppFirstCodingTest
 {
@@ -105,17 +105,8 @@ namespace WpfAppFirstCodingTest
                     con.Open();
                     con.Close();
 
-
-                    ///////////////////////////////////////////////////////////////////////////////////////
-                    /* UsernameTextBox.IsEnabled = false;
-                      PasswordBox.IsEnabled = false;
-                      SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-AUDNFC2;Initial Catalog=" + DB_NameTextBox.Text + ";Integrated Security=true;");
-                           con.Open();
-                          //cmd.ExecuteNonQuery();
-
-                          con.Close();
-                           */
                 }
+
 #pragma warning disable CS0252 // Possible unintended reference comparison; left hand side needs cast
                 else if (ComboBox.SelectedIndex == 0)
                 {
@@ -203,16 +194,55 @@ namespace WpfAppFirstCodingTest
             }
 
             catch (Exception ex)
-            { 
-               if (string.IsNullOrEmpty(filePath))
             {
-                MessageBox.Show("Location select please!!");
-            }
+                if (string.IsNullOrEmpty(filePath))
+                {
+                    WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
+                    folderDialog.ShowNewFolderButton = false;
+                    folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
+                    // WinForms.DialogResult result = folderDialog.ShowDialog();
+                    String sPath = folderDialog.SelectedPath;
+                    DirectoryInfo folder = new DirectoryInfo(sPath);
 
-            else
-            {
-                MessageBox.Show("something Wrong!!!!");
-            }
+                    /* if (result == WinForms.DialogResult.OK)
+                     {
+                         //----< Selected Folder >----
+                         //< Selected Path >
+                         String sPath = folderDialog.SelectedPath;
+                         // tbxFolder.Text = sPath;
+                         //</ Selected Path >
+                         String sPath = folderDialog.SelectedPath;
+                         //--------< Folder >--------
+                         DirectoryInfo folder = new DirectoryInfo(sPath);
+                         if (folder.Exists)
+                         {
+                             //------< @Loop: Files >------
+                             foreach (FileInfo fileInfo in folder.GetFiles())
+                             {
+                                 //----< File >----
+                                 //String sDate = fileInfo.CreationTime.ToString("yyyy-MM-dd");
+                                 Debug.WriteLine("#Debug: File: " + fileInfo.Name);
+                                 //----</ File >----
+                             }
+                         }
+                     }
+                     */
+                    var path = sPath + "/test.pdf";
+                    Document pdfDocument = new Document();
+                    PdfWriter.GetInstance(pdfDocument,
+                             new FileStream(path, FileMode.Create));
+                    // FileStream outputFileStream = File.Open(path, FileMode.Create);
+                    pdfDocument.Open();
+                    pdfDocument.Add(new iTextSharp.text.Paragraph("Here is a test of creating a PDF"));
+                    pdfDocument.Close();
+                    //  MessageBox.Show("created");
+                    Process.Start(path);
+
+                }
+                else
+                {
+                    MessageBox.Show("something Wrong!!!!");
+                }
             }
         }
         string fileContent = string.Empty;
