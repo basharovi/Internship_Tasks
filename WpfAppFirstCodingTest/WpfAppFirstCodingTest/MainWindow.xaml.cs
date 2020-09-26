@@ -177,7 +177,7 @@ namespace WpfAppFirstCodingTest
          ----------------------------------------------------------------------------------------------------------*/
 
 
-            try{
+            try {
                 //var path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                 var path = filePath + "/test.pdf";
                 Document pdfDocument = new Document();
@@ -187,7 +187,7 @@ namespace WpfAppFirstCodingTest
                 pdfDocument.Open();
                 pdfDocument.Add(new iTextSharp.text.Paragraph("Here is a test of creating a PDF"));
                 pdfDocument.Close();
-              //  MessageBox.Show("created");
+                //  MessageBox.Show("created");
                 Process.Start(path);
 
 
@@ -213,32 +213,46 @@ namespace WpfAppFirstCodingTest
                          //</ Selected Path >
                          String sPath = folderDialog.SelectedPath;
                          //--------< Folder >--------
-                         DirectoryInfo folder = new DirectoryInfo(sPath);
-                         if (folder.Exists)
-                         {
-                             //------< @Loop: Files >------
-                             foreach (FileInfo fileInfo in folder.GetFiles())
-                             {
-                                 //----< File >----
-                                 //String sDate = fileInfo.CreationTime.ToString("yyyy-MM-dd");
-                                 Debug.WriteLine("#Debug: File: " + fileInfo.Name);
-                                 //----</ File >----
-                             }
-                         }
-                     }
-                     */
-                    var path = sPath + "/test.pdf";
-                    Document pdfDocument = new Document();
-                    PdfWriter.GetInstance(pdfDocument,
-                             new FileStream(path, FileMode.Create));
-                    // FileStream outputFileStream = File.Open(path, FileMode.Create);
-                    pdfDocument.Open();
-                    pdfDocument.Add(new iTextSharp.text.Paragraph("Here is a test of creating a PDF"));
-                    pdfDocument.Close();
-                    //  MessageBox.Show("created");
-                    Process.Start(path);
+                         DirectoryInfo folder = new DirectoryInfo(sPath);*/
+                    if (folder.Exists)
+                    {
+                        //------< @Loop: Files >------
+                        foreach (FileInfo fileInfo in folder.GetFiles())
+                        {
+                            //----< File >----
+                            //String sDate = fileInfo.CreationTime.ToString("yyyy-MM-dd");
+                            Debug.WriteLine("#Debug: File: " + fileInfo.Name);
+                            //----</ File >----
+                            //--< check and create Directory >--
+                            //*if subfolder does not exist then create one
+                            String sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
+                            if (Directory.Exists(sPath_SubDirectory) == false)
+                            { Directory.CreateDirectory(sPath_SubDirectory);
+                                sPath = sPath_SubDirectory;
+                            }
 
-                }
+                            else
+                            {
+                                sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
+                                sPath = sPath_SubDirectory;
+                            }
+                        }
+                    }
+
+                var path = sPath + "/test.pdf";
+                Document pdfDocument = new Document();
+                PdfWriter.GetInstance(pdfDocument,
+                         new FileStream(path, FileMode.Create));
+                // FileStream outputFileStream = File.Open(path, FileMode.Create);
+                pdfDocument.Open();
+                pdfDocument.Add(new iTextSharp.text.Paragraph("Here is a test of creating a PDF"));
+                pdfDocument.Close();
+                //  MessageBox.Show("created");
+                Process.Start(path);
+
+               }
+            
+        
                 else
                 {
                     MessageBox.Show("something Wrong!!!!");
