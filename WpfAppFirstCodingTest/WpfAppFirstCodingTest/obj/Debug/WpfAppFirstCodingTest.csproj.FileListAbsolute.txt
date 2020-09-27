@@ -43,7 +43,6 @@ G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debu
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.Pdf.Base.xml
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.PdfViewer.WPF.xml
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.Shared.WPF.xml
-G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\WpfAppFirstCodingTest.csprojAssemblyReference.cache
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\MainWindow.g.cs
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\App.g.cs
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\WpfAppFirstCodingTest_MarkupCompile.cache
