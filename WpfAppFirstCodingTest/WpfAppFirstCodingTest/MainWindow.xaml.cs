@@ -113,24 +113,19 @@ namespace WpfAppFirstCodingTest
             try
             {                
                 if (ComboBox.SelectedIndex == 1)
-                {
-                   
-
+                {                   
                     Disable();
                 }
-
                 else
-                {
-                  
+                {                  
                     Enable();                  
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
         }
-
         private string ChageConnectionString()
         {
             var conncetionString = _conncetionString;
@@ -143,11 +138,10 @@ namespace WpfAppFirstCodingTest
                 conncetionString = conncetionString +" User Id=" + UsernameTextBox.Text + "; Password=" + PasswordBox.Password + "";                   
                 }         
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
-
             return conncetionString;
         }        
     }       
