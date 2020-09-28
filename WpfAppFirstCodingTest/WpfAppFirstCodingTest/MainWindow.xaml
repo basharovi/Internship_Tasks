@@ -34,9 +34,9 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <ComboBox x:Name="ComboBox" HorizontalAlignment="Left" Margin="60,217,0,0" VerticalAlignment="Top" Width="428" Height="39" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem IsSelected="True" >SQL Server Authentication</ComboBoxItem>
-            <ComboBoxItem >Windows Authentication</ComboBoxItem>
+        <ComboBox x:Name="ComboBox" HorizontalAlignment="Left" Margin="60,217,0,0" VerticalAlignment="Top" Width="428" Height="39" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged" SelectedIndex="0">
+            <ComboBoxItem IsSelected="True">SQL Server Authentication</ComboBoxItem>
+            <ComboBoxItem  >Windows Authentication</ComboBoxItem>
 
         </ComboBox>
         <Label Content="Enter Database Name" HorizontalAlignment="Left" Margin="613,195,0,0" VerticalAlignment="Top" Width="425" Height="38" Grid.ColumnSpan="3"/>
