@@ -21,46 +21,21 @@ namespace WpfAppFirstCodingTest
             InitializeComponent();
 
             _sqlConnection = new SqlConnection(_conncetionString);
-
-            Disable();
+            TextBox.Text = _conncetionString;
+            Disable();           
         }
    
-        public void Button_Click(object sender, RoutedEventArgs e)
+        public void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            TextBox.Text = _conncetionString;
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {            
-            try
-            {
-                if (ComboBox.SelectedIndex == 1)
-                {
-                    Disable();
-
-                    _conncetionString = _conncetionString.Replace("False;User Id=" + UsernameTextBox.Text + " Password=" + PasswordBox.Password + "", "True");
-                }
-
-                else
-                {
-                    Enable();
-
-                    _conncetionString = _conncetionString.Replace("True", "False;");
-                  
-                   _conncetionString = _conncetionString + "User Id=" + UsernameTextBox.Text + "; Password=" + PasswordBox.Password;
-                }            
-            }
-            catch (Exception ex)
-            {
-
-            }          
-        }
+            TextBox.Text = ChageConnectionString();
+        }     
 
         public void Disable()
         {
             UsernameTextBox.IsEnabled = false;
             PasswordBox.IsEnabled = false;
         }
+
         public void Enable()
         {
             UsernameTextBox.IsEnabled = true;
@@ -132,6 +107,49 @@ namespace WpfAppFirstCodingTest
             System.Windows.Forms.DialogResult result = dialog.ShowDialog();          
             filePath = dialog.SelectedPath;  // file path
         }
-    }    
+
+        private void DropDownClosed(object sender, EventArgs e)
+        {           
+            try
+            {                
+                if (ComboBox.SelectedIndex == 1)
+                {
+                   
+
+                    Disable();
+                }
+
+                else
+                {
+                  
+                    Enable();                  
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private string ChageConnectionString()
+        {
+            var conncetionString = _conncetionString;
+            try
+            {             
+            if (ComboBox.SelectedIndex == 0)
+                {
+                conncetionString = conncetionString.Replace("True", "False;");
+                 
+                conncetionString = conncetionString +" User Id=" + UsernameTextBox.Text + "; Password=" + PasswordBox.Password + "";                   
+                }         
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return conncetionString;
+        }        
+    }       
 }
 
