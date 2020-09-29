@@ -8,8 +8,10 @@
         Title="MainWindow" Height="713.942" Width="1368.99">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="730*"/>
-            <ColumnDefinition Width="631*"/>
+            <ColumnDefinition Width="636*"/>
+            <ColumnDefinition Width="94*"/>
+            <ColumnDefinition Width="590*"/>
+            <ColumnDefinition Width="41*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Enter Server Name :" HorizontalAlignment="Left" Margin="61,96,0,0" VerticalAlignment="Top" Width="425" RenderTransformOrigin="0.5,0.5" Height="50">
             <Label.RenderTransform>
@@ -32,17 +34,17 @@
                 </TransformGroup>
             </Label.RenderTransform>
         </Label>
-        <ComboBox x:Name="ComboBox" HorizontalAlignment="Left" Margin="60,217,0,0" VerticalAlignment="Top" Width="428" Height="39" IsEditable="False" SelectionChanged="ComboBox_SelectionChanged">
-            <ComboBoxItem IsSelected="True" >SQL Server Authentication</ComboBoxItem>
-            <ComboBoxItem >Windows Authentication</ComboBoxItem>
+        <ComboBox x:Name="ComboBox" HorizontalAlignment="Left" Margin="60,217,0,0" VerticalAlignment="Top" Width="428" Height="39" IsEditable="False"  SelectedIndex="1" DropDownClosed="DropDownClosed">
+            <ComboBoxItem >SQL Server Authentication</ComboBoxItem>
+            <ComboBoxItem  >Windows Authentication</ComboBoxItem>
 
         </ComboBox>
-        <Label Content="Enter Database Name" HorizontalAlignment="Left" Margin="613,195,0,0" VerticalAlignment="Top" Width="425" Height="38" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="DbNameTextBox" HorizontalAlignment="Left" Height="35" Margin="612,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="436" Grid.ColumnSpan="2"/>
+        <Label Content="Enter Database Name" HorizontalAlignment="Left" Margin="613,195,0,0" VerticalAlignment="Top" Width="425" Height="38" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="DbNameTextBox" HorizontalAlignment="Left" Height="35" Margin="612,233,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="436" Grid.ColumnSpan="3"/>
         <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Height="53" Margin="60,323,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.484,2.348"/>
         <Label Content="Enter Username " HorizontalAlignment="Left" Margin="60,298,0,0" VerticalAlignment="Top" Width="428" Height="47"/>
-        <Label Content="Enter Password " HorizontalAlignment="Left" Margin="613,298,0,0" VerticalAlignment="Top" Width="435" Height="47" Grid.ColumnSpan="2"/>
-        <Button x:Name="UpdateBtn" Content="Update" HorizontalAlignment="Left" Margin="163,466,0,0" VerticalAlignment="Top" Width="214" RenderTransformOrigin="0.5,0.5" Height="81" Click="Button_Click" IsEnabled="True">
+        <Label Content="Enter Password " HorizontalAlignment="Left" Margin="613,298,0,0" VerticalAlignment="Top" Width="435" Height="47" Grid.ColumnSpan="3"/>
+        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="163,466,0,0" VerticalAlignment="Top" Width="214" RenderTransformOrigin="0.5,0.5" Height="81" Click="UpdateButton_Click" IsEnabled="True">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -52,9 +54,10 @@
                 </TransformGroup>
             </Button.RenderTransform>
         </Button>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="613,320,0,0" VerticalAlignment="Top" Height="56" Width="435" Grid.ColumnSpan="2"/>
-        <Button x:Name="PrintBtn" Content="PDF" HorizontalAlignment="Left" Margin="501,462,0,0" VerticalAlignment="Top" Width="256" Height="83" Click="PrintBtn_Click" Grid.ColumnSpan="2"  />
-        <Button x:Name="SelectLocationButton" Content="Select Location" HorizontalAlignment="Left" Margin="216,462,0,0" VerticalAlignment="Top" Width="205" Height="83" Click="SaveAsButton_Click" Grid.Column="1"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="613,320,0,0" VerticalAlignment="Top" Height="56" Width="435" Grid.ColumnSpan="3"/>
+        <Button x:Name="PrintBtn" Content="PDF" HorizontalAlignment="Left" Margin="501,462,0,0" VerticalAlignment="Top" Width="256" Height="83" Click="PrintBtn_Click" Grid.ColumnSpan="3"  />
+        <Button x:Name="SelectLocationButton" Content="Select Location" HorizontalAlignment="Left" Margin="216,462,0,0" VerticalAlignment="Top" Width="205" Height="83" Click="SaveAsButton_Click" Grid.Column="2"/>
+        <TextBox x:Name="TextBox" Grid.Column="2" HorizontalAlignment="Left" Height="77" Margin="339,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="241"/>
 
     </Grid>
 </Window>
