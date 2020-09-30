@@ -16,7 +16,6 @@ namespace WpfAppFirstCodingTest
     {
         private string _conncetionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ToString();
         private SqlConnection _sqlConnection;
-
         Document pdfDocument = new Document(PageSize.A4);
 
         public MainWindow()
@@ -56,6 +55,7 @@ namespace WpfAppFirstCodingTest
                     folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;            
                     String sPath = folderDialog.SelectedPath;
                     DirectoryInfo folder = new DirectoryInfo(sPath);
+
                     if (folder.Exists)
                     {                        
                             var sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
@@ -70,15 +70,14 @@ namespace WpfAppFirstCodingTest
                                 sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
                                 sPath = sPath_SubDirectory;
                             }
-                        var path = sPath + "/test.pdf";
-                        
+
+                        var path = sPath + "/test.pdf";                        
                         PdfWriter.GetInstance(pdfDocument,
                                  new FileStream(path, FileMode.Create));
                         pdfDocument.Open();
-
                         CreatePdf();
-
                         pdfDocument.Close();
+
                         Process.Start(path);
                     }
                     else
@@ -97,9 +96,9 @@ namespace WpfAppFirstCodingTest
                     Process.Start(path);
                 }
             }
-            catch (Exception )
+            catch (Exception ex)
             {
-               
+                MessageBox.Show(ex.Message);
             }
                 
         }  
@@ -113,7 +112,7 @@ namespace WpfAppFirstCodingTest
             filePath = dialog.SelectedPath;  // file path
         }
 
-        private Document CreatePdf()
+        private void CreatePdf()
         {           
             PdfPTable table = new PdfPTable(3);
             table.SetTotalWidth(new float[] { 600, 300, 600 });
@@ -202,57 +201,56 @@ namespace WpfAppFirstCodingTest
             cell.FixedHeight = 45;
             table.AddCell(cell);
 
-            var nestedTable = new PdfPTable(3);
-            nestedTable.SetTotalWidth(new float[] { 150, 300, 150 });
+            var button = new PdfPTable(3); //here used Nested Table 
+            button.SetTotalWidth(new float[] { 150, 300, 150 });
             table.DefaultCell.FixedHeight = 45;
             table.DefaultCell.BorderColor = new BaseColor(255, 255, 255);
             cell = new PdfPCell(new Phrase(""));
             cell.Border = Rectangle.NO_BORDER;
             cell.FixedHeight = 45;
-            nestedTable.AddCell(cell);
+            button.AddCell(cell);
             cell = new PdfPCell(new Phrase("Update"));
             cell.HorizontalAlignment = Element.ALIGN_CENTER;
             cell.BackgroundColor = new BaseColor(221, 221, 221);
             cell.FixedHeight = 45;
             cell.PaddingTop = 15;
-            nestedTable.AddCell(cell);
+            button.AddCell(cell);
             cell = new PdfPCell(new Phrase(""));
             cell.Border = Rectangle.NO_BORDER;
             cell.FixedHeight = 45;
-            nestedTable.AddCell(cell);
-            table.AddCell(nestedTable);
+            button.AddCell(cell);
+            table.AddCell(button);
 
-            nestedTable = new PdfPTable(1);
-            nestedTable.SetTotalWidth(new float[] { 300 });
+            button = new PdfPTable(1); //here used Nested Table
+            button.SetTotalWidth(new float[] {300});
             cell = new PdfPCell(new Phrase("PDF"));
             cell.HorizontalAlignment = Element.ALIGN_CENTER;
             cell.BackgroundColor = new BaseColor(221, 221, 221);
             cell.FixedHeight = 45;
             cell.PaddingTop = 15;
-            nestedTable.AddCell(cell);
-            table.AddCell(nestedTable);
+            button.AddCell(cell);
+            table.AddCell(button);
 
-            nestedTable = new PdfPTable(3);
-            nestedTable.SetTotalWidth(new float[] { 150, 300, 150 });
+            button = new PdfPTable(3); //here used Nested Table
+            button.SetTotalWidth(new float[] { 150, 300, 150 });
             cell = new PdfPCell(new Phrase(""));
             cell.Border = Rectangle.NO_BORDER;
             cell.FixedHeight = 45;
-            nestedTable.AddCell(cell);
+            button.AddCell(cell);
             cell = new PdfPCell(new Phrase("Select Location"));
             cell.HorizontalAlignment = Element.ALIGN_CENTER;
             cell.BackgroundColor = new BaseColor(221, 221, 221);
             cell.FixedHeight = 45;
             cell.PaddingTop = 7;
-            nestedTable.AddCell(cell);
+            button.AddCell(cell);
             cell = new PdfPCell(new Phrase(""));
             cell.Border = Rectangle.NO_BORDER;
             cell.FixedHeight = 45;
-            nestedTable.AddCell(cell);
-            table.AddCell(nestedTable);
+            button.AddCell(cell);
+            table.AddCell(button);
 
             pdfDocument.Add(table);
-
-            return pdfDocument;         
+                
         }
 
         private void DropDownClosed(object sender, EventArgs e)
