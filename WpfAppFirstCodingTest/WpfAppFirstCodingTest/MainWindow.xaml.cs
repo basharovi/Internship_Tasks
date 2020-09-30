@@ -9,6 +9,7 @@ using System.Diagnostics;
 using WinForms = System.Windows.Forms;
 using System.Configuration;
 
+
 namespace WpfAppFirstCodingTest
 {
     public partial class MainWindow : Window
@@ -44,35 +45,22 @@ namespace WpfAppFirstCodingTest
 
         public void PrintBtn_Click(object sender, RoutedEventArgs e)
         {
-            try {
-                var path = filePath + "/test.pdf";
-                var pdfDocument = new Document();
-                PdfWriter.GetInstance(pdfDocument,
-                         new FileStream(path, FileMode.Create));
-                pdfDocument.Open();
-                pdfDocument.Add(new Paragraph("Here is a test of creating a PDF"));
-                pdfDocument.Close();              
-                Process.Start(path);
-            }
-            catch (Exception)
+            try
             {
                 if (string.IsNullOrEmpty(filePath))
                 {
-                    var folderDialog = new WinForms.FolderBrowserDialog();
+                    WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
                     folderDialog.ShowNewFolderButton = false;
-                    folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
-                
-                    var sPath = folderDialog.SelectedPath;
+                    folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;            
+                    String sPath = folderDialog.SelectedPath;
                     DirectoryInfo folder = new DirectoryInfo(sPath);
-
                     if (folder.Exists)
-                    {
-                        foreach (FileInfo fileInfo in folder.GetFiles())
-                        {
+                    {                        
                             var sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
 
                             if (Directory.Exists(sPath_SubDirectory) == false)
-                            { Directory.CreateDirectory(sPath_SubDirectory);
+                            {
+                                Directory.CreateDirectory(sPath_SubDirectory);
                                 sPath = sPath_SubDirectory;
                             }
                             else
@@ -80,24 +68,72 @@ namespace WpfAppFirstCodingTest
                                 sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
                                 sPath = sPath_SubDirectory;
                             }
-                        }
+                        var path = sPath + "/test.pdf";
+                        Document pdfDocument = new Document(PageSize.A4);
+                        PdfWriter.GetInstance(pdfDocument,
+                                 new FileStream(path, FileMode.Create));
+                        pdfDocument.Open();
+                        
+                        PdfPTable table = new PdfPTable(2);
+                        table.SetTotalWidth(new float[] {250,250});
+                        table.DefaultCell.Padding = 1;
+                        
+                        PdfPCell cell = new PdfPCell(new Phrase("Header spanning 3 columns"));
+                        cell.BackgroundColor = new BaseColor(100,100,100);
+                        cell.Colspan = 2;
+                        cell.FixedHeight = 50;
+                        cell.HorizontalAlignment = 1; //0=Left, 1=Centre, 2=Right                        
+                        table.AddCell(cell);
+
+                        table.AddCell("Row 2, Col 1");
+                        table.AddCell("Row 2, Col 2");
+                                             
+                        cell = new PdfPCell(new Phrase("Row 3, Col 1 & 2 "));
+                        cell.Colspan = 2;
+                        cell.FixedHeight = 50;
+                        table.AddCell(cell);                   
+
+                        table.AddCell("Row 4, Col 1");
+                        table.AddCell("Row 4, Col 2");
+
+                        table.AddCell("Row 5, Col 1");
+                        table.AddCell("Row 5, Col 2");
+
+                        table.AddCell("Row 6, Col 1");
+                        cell = new PdfPCell(new Phrase("Row 6,  2 "));
+                        cell.FixedHeight = 50;
+                        table.AddCell(cell);
+
+                        table.AddCell("Row 7, Col 1");
+                        table.AddCell("Row 7, Col 2");
+
+                        pdfDocument.Add(table);
+                        pdfDocument.Close();
+                        Process.Start(path);
                     }
-                var path = sPath + "/test.pdf";
-                var pdfDocument = new Document();
-                PdfWriter.GetInstance(pdfDocument,
-                         new FileStream(path, FileMode.Create));            
-                pdfDocument.Open();
-                pdfDocument.Add(new iTextSharp.text.Paragraph("Here is a test of creating a PDF"));
-                pdfDocument.Close();
-             
-                Process.Start(path);
-               }      
+                    else
+                    {
+                        MessageBox.Show("Folder doesn't exixt");
+                    }                
+                }
                 else
                 {
-                    MessageBox.Show("something Wrong!!!!");
+                    var path = filePath + "/test.pdf";
+                    var pdfDocument = new Document();
+                    PdfWriter.GetInstance(pdfDocument,
+                             new FileStream(path, FileMode.Create));
+                    pdfDocument.Open();
+                    pdfDocument.Add(new Paragraph("Here is a test of creating a PDF"));
+                    pdfDocument.Close();
+                    Process.Start(path);
                 }
             }
-        }
+            catch (Exception )
+            {
+               
+            }
+                
+        }  
 
         string filePath = string.Empty;
 
@@ -126,6 +162,7 @@ namespace WpfAppFirstCodingTest
 
             }
         }
+
         private string ChageConnectionString()
         {
             var conncetionString = _conncetionString;

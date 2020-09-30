@@ -31,6 +31,8 @@ G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debu
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\WpfAppFirstCodingTest.exe
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\WpfAppFirstCodingTest.pdb
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\BouncyCastle.Crypto.dll
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Common.Logging.Core.dll
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Common.Logging.dll
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\FolderBrowserDialogEx.dll
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\itextsharp.dll
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.Compression.Base.dll
@@ -38,6 +40,11 @@ G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debu
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.Pdf.Base.dll
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.PdfViewer.WPF.dll
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.Shared.WPF.dll
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\BouncyCastle.Crypto.xml
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Common.Logging.pdb
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Common.Logging.xml
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Common.Logging.Core.pdb
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Common.Logging.Core.xml
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\itextsharp.xml
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.Compression.Base.xml
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\Syncfusion.Pdf.Base.xml
