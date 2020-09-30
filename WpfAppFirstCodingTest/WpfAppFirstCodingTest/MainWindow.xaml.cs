@@ -16,7 +16,6 @@ namespace WpfAppFirstCodingTest
     {
         private string _conncetionString = ConfigurationManager.ConnectionStrings["myConnectionString"].ToString();
         private SqlConnection _sqlConnection;
-        Document pdfDocument = new Document(PageSize.A4);
 
         public MainWindow()
         {
@@ -24,13 +23,13 @@ namespace WpfAppFirstCodingTest
 
             _sqlConnection = new SqlConnection(_conncetionString);
             TextBox.Text = _conncetionString;
-            Disable();           
+            Disable();
         }
-   
+
         public void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             TextBox.Text = ChageConnectionString();
-        }     
+        }
 
         public void Disable()
         {
@@ -52,68 +51,63 @@ namespace WpfAppFirstCodingTest
                 {
                     WinForms.FolderBrowserDialog folderDialog = new WinForms.FolderBrowserDialog();
                     folderDialog.ShowNewFolderButton = false;
-                    folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;            
+                    folderDialog.SelectedPath = System.AppDomain.CurrentDomain.BaseDirectory;
                     String sPath = folderDialog.SelectedPath;
                     DirectoryInfo folder = new DirectoryInfo(sPath);
 
                     if (folder.Exists)
-                    {                        
-                            var sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
+                    {
+                        var sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
 
-                            if (Directory.Exists(sPath_SubDirectory) == false)
-                            {
-                                Directory.CreateDirectory(sPath_SubDirectory);
-                                sPath = sPath_SubDirectory;
-                            }
-                            else
-                            {
-                                sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
-                                sPath = sPath_SubDirectory;
-                            }
+                        if (Directory.Exists(sPath_SubDirectory) == false)
+                        {
+                            Directory.CreateDirectory(sPath_SubDirectory);
+                            sPath = sPath_SubDirectory;
+                        }
+                        else
+                        {
+                            sPath_SubDirectory = folder.FullName + "\\" + "MyDocuments";
+                            sPath = sPath_SubDirectory;
+                        }
 
-                        var path = sPath + "/test.pdf";                        
-                        PdfWriter.GetInstance(pdfDocument,
-                                 new FileStream(path, FileMode.Create));
-                        pdfDocument.Open();
-                        CreatePdf();
-                        pdfDocument.Close();
-
-                        Process.Start(path);
+                        var path = sPath + "/test.pdf";
+                        CreatePdf(path);
                     }
                     else
                     {
                         MessageBox.Show("Folder doesn't exixt");
-                    }                
+                    }
                 }
                 else
                 {
-                    var path = filePath + "/test.pdf";                   
-                    PdfWriter.GetInstance(pdfDocument,
-                             new FileStream(path, FileMode.Create));
-                    pdfDocument.Open();
-                    CreatePdf();
-                    pdfDocument.Close();
-                    Process.Start(path);
+                    var path = filePath + "/test.pdf";
+
+                    CreatePdf(path);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-                
-        }  
+
+        }
 
         string filePath = string.Empty;
 
         public void SaveAsButton_Click(object sender, RoutedEventArgs e)
-        {         
-            var dialog = new System.Windows.Forms.FolderBrowserDialog();           
-            System.Windows.Forms.DialogResult result = dialog.ShowDialog();          
+        {
+            var dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = dialog.ShowDialog();
             filePath = dialog.SelectedPath;  // file path
         }
 
-        private void CreatePdf()
-        {           
+        private void CreatePdf(string path)
+        {
+            Document pdfDocument = new Document(PageSize.A4);
+            PdfWriter.GetInstance(pdfDocument, new FileStream(path, FileMode.Create));
+
+            pdfDocument.Open();
+
             PdfPTable table = new PdfPTable(3);
             table.SetTotalWidth(new float[] { 600, 300, 600 });
             table.DefaultCell.FixedHeight = 30;
@@ -222,7 +216,7 @@ namespace WpfAppFirstCodingTest
             table.AddCell(button);
 
             button = new PdfPTable(1); //here used Nested Table
-            button.SetTotalWidth(new float[] {300});
+            button.SetTotalWidth(new float[] { 300 });
             cell = new PdfPCell(new Phrase("PDF"));
             cell.HorizontalAlignment = Element.ALIGN_CENTER;
             cell.BackgroundColor = new BaseColor(221, 221, 221);
@@ -250,20 +244,22 @@ namespace WpfAppFirstCodingTest
             table.AddCell(button);
 
             pdfDocument.Add(table);
-                
+
+            pdfDocument.Close();
+            Process.Start(path);
         }
 
         private void DropDownClosed(object sender, EventArgs e)
-        {           
+        {
             try
-            {                
+            {
                 if (ComboBox.SelectedIndex == 1)
-                {                   
+                {
                     Disable();
                 }
                 else
-                {                  
-                    Enable();                  
+                {
+                    Enable();
                 }
             }
             catch (Exception)
@@ -276,20 +272,20 @@ namespace WpfAppFirstCodingTest
         {
             var conncetionString = _conncetionString;
             try
-            {             
-            if (ComboBox.SelectedIndex == 0)
+            {
+                if (ComboBox.SelectedIndex == 0)
                 {
-                conncetionString = conncetionString.Replace("True", "False;");
-                 
-                conncetionString = conncetionString +" User Id=" + UsernameTextBox.Text + "; Password=" + PasswordBox.Password + "";                   
-                }         
+                    conncetionString = conncetionString.Replace("True", "False;");
+
+                    conncetionString = conncetionString + " User Id=" + UsernameTextBox.Text + "; Password=" + PasswordBox.Password + "";
+                }
             }
             catch (Exception)
             {
 
             }
             return conncetionString;
-        }        
-    }       
+        }
+    }
 }
 
