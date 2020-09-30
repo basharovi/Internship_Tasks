@@ -71,7 +71,9 @@ namespace WpfAppFirstCodingTest
                         }
 
                         var path = sPath + "/test.pdf";
+
                         CreatePdf(path);
+                        Process.Start(path);
                     }
                     else
                     {
@@ -83,6 +85,7 @@ namespace WpfAppFirstCodingTest
                     var path = filePath + "/test.pdf";
 
                     CreatePdf(path);
+                    Process.Start(path);
                 }
             }
             catch (Exception ex)
@@ -245,8 +248,7 @@ namespace WpfAppFirstCodingTest
 
             pdfDocument.Add(table);
 
-            pdfDocument.Close();
-            Process.Start(path);
+            pdfDocument.Close();          
         }
 
         private void DropDownClosed(object sender, EventArgs e)
