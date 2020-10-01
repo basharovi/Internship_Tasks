@@ -106,14 +106,14 @@ namespace WpfAppFirstCodingTest
 
         private void CreatePdf(string path)
         {
-            Document pdfDocument = new Document(PageSize.LETTER);
+            var pdfDocument = new Document(PageSize.LETTER);
             try
             {
                 var writer = PdfWriter.GetInstance(pdfDocument, new FileStream(path, FileMode.Create));
 
                 pdfDocument.Open();
 
-                PdfPTable table = new PdfPTable(3);
+                var table = new PdfPTable(3);
                 table.SetTotalWidth(new float[] { 600, 300, 600 });
                 table.DefaultCell.FixedHeight = 30;
                 var cell = new PdfPCell(new Phrase("Enter The Server Name:"));
@@ -249,12 +249,14 @@ namespace WpfAppFirstCodingTest
                 table.AddCell(button);
 
                 pdfDocument.Add(table);
-                BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1252, false);
-                BaseColor bc = new BaseColor(0, 0, 0, 45);
-                Font times = new Font(bfTimes, 100F, Font.ITALIC, bc);
+                var baseFontStyle = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1252, false);
+                var baseColor = new BaseColor(0, 0, 0, 45);
+                var times = new Font(baseFontStyle, 180, Font.ITALIC, baseColor);
                 // Dim wfont = New Font(BaseFont.TIMES_ROMAN, 1.0F, BaseFont.COURIER, BaseColor.LIGHT_GRAY)
-                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, new Phrase("Hossain", times), 300, 500, 45);
-               //End water mark
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_RIGHT, new Phrase("Hossain", times), 500, 700, 45);
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_BASELINE, new Phrase("Hossain", times),0, 1, 0);
+                
+                //End water mark
                 pdfDocument.Close();
             }
             catch (Exception)
