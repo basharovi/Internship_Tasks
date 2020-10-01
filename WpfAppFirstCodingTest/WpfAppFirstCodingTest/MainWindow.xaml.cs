@@ -106,7 +106,7 @@ namespace WpfAppFirstCodingTest
 
         private void CreatePdf(string path)
         {
-            Document pdfDocument = new Document(PageSize.A4);
+            Document pdfDocument = new Document(PageSize.LETTER);
             try
             {
                 var writer = PdfWriter.GetInstance(pdfDocument, new FileStream(path, FileMode.Create));
@@ -253,7 +253,7 @@ namespace WpfAppFirstCodingTest
                 BaseColor bc = new BaseColor(0, 0, 0, 45);
                 Font times = new Font(bfTimes, 100F, Font.ITALIC, bc);
                 // Dim wfont = New Font(BaseFont.TIMES_ROMAN, 1.0F, BaseFont.COURIER, BaseColor.LIGHT_GRAY)
-                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, new Phrase("Hossain", times), 297, 550, -70);
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, new Phrase("Hossain", times), 300, 500, 45);
                //End water mark
                 pdfDocument.Close();
             }
