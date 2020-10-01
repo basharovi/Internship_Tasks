@@ -8,7 +8,7 @@ using System.IO;
 using System.Diagnostics;
 using WinForms = System.Windows.Forms;
 using System.Configuration;
-
+using Image = System.Windows.Controls.Image;
 
 namespace WpfAppFirstCodingTest
 {
@@ -107,148 +107,160 @@ namespace WpfAppFirstCodingTest
         private void CreatePdf(string path)
         {
             Document pdfDocument = new Document(PageSize.A4);
-            PdfWriter.GetInstance(pdfDocument, new FileStream(path, FileMode.Create));
+            try
+            {
+                var writer = PdfWriter.GetInstance(pdfDocument, new FileStream(path, FileMode.Create));
 
-            pdfDocument.Open();
+                pdfDocument.Open();
 
-            PdfPTable table = new PdfPTable(3);
-            table.SetTotalWidth(new float[] { 600, 300, 600 });
-            table.DefaultCell.FixedHeight = 30;
-            var cell = new PdfPCell(new Phrase("Enter The Server Name:"));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.PaddingTop = 20;
-            cell.FixedHeight = 45;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.FixedHeight = 45;
-            cell.Border = Rectangle.NO_BORDER;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.PaddingTop = 20;
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            table.AddCell(cell);
+                PdfPTable table = new PdfPTable(3);
+                table.SetTotalWidth(new float[] { 600, 300, 600 });
+                table.DefaultCell.FixedHeight = 30;
+                var cell = new PdfPCell(new Phrase("Enter The Server Name:"));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.PaddingTop = 20;
+                cell.FixedHeight = 45;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.FixedHeight = 45;
+                cell.Border = Rectangle.NO_BORDER;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.PaddingTop = 20;
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                table.AddCell(cell);
 
-            table.AddCell("");
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            table.AddCell(cell);
+                table.AddCell("");
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                table.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Authentication Type:"));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.PaddingTop = 20;
-            cell.FixedHeight = 40;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 40;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Enter The database Name:"));
-            cell.FixedHeight = 40;
-            cell.PaddingTop = 20;
-            cell.Border = Rectangle.NO_BORDER;
-            table.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Authentication Type:"));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.PaddingTop = 20;
+                cell.FixedHeight = 40;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 40;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Enter The database Name:"));
+                cell.FixedHeight = 40;
+                cell.PaddingTop = 20;
+                cell.Border = Rectangle.NO_BORDER;
+                table.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Windows Authentication"));
-            cell.BackgroundColor = new BaseColor(221, 221, 221);
-            cell.PaddingTop = 8;
-            cell.FixedHeight = 30;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.FixedHeight = 30;
-            table.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Windows Authentication"));
+                cell.BackgroundColor = new BaseColor(221, 221, 221);
+                cell.PaddingTop = 8;
+                cell.FixedHeight = 30;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.FixedHeight = 30;
+                table.AddCell(cell);
 
-            cell = new PdfPCell(new Phrase("Enter UserName:"));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.PaddingTop = 20;
-            cell.FixedHeight = 45;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.FixedHeight = 45;
-            cell.Border = Rectangle.NO_BORDER;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Enter Password:"));
-            cell.PaddingTop = 20;
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            table.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Enter UserName:"));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.PaddingTop = 20;
+                cell.FixedHeight = 45;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.FixedHeight = 45;
+                cell.Border = Rectangle.NO_BORDER;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Enter Password:"));
+                cell.PaddingTop = 20;
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                table.AddCell(cell);
 
-            table.AddCell("");
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            table.AddCell(cell);
-            table.AddCell("");
+                table.AddCell("");
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                table.AddCell(cell);
+                table.AddCell("");
 
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            table.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                table.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                table.AddCell(cell);
 
-            var button = new PdfPTable(3); //here used Nested Table 
-            button.SetTotalWidth(new float[] { 150, 300, 150 });
-            table.DefaultCell.FixedHeight = 45;
-            table.DefaultCell.BorderColor = new BaseColor(255, 255, 255);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            button.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Update"));
-            cell.HorizontalAlignment = Element.ALIGN_CENTER;
-            cell.BackgroundColor = new BaseColor(221, 221, 221);
-            cell.FixedHeight = 45;
-            cell.PaddingTop = 15;
-            button.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            button.AddCell(cell);
-            table.AddCell(button);
+                var button = new PdfPTable(3); //here used Nested Table 
+                button.SetTotalWidth(new float[] { 150, 300, 150 });
+                table.DefaultCell.FixedHeight = 45;
+                table.DefaultCell.BorderColor = new BaseColor(255, 255, 255);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                button.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Update"));
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell.BackgroundColor = new BaseColor(221, 221, 221);
+                cell.FixedHeight = 45;
+                cell.PaddingTop = 15;
+                button.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                button.AddCell(cell);
+                table.AddCell(button);
 
-            button = new PdfPTable(1); //here used Nested Table
-            button.SetTotalWidth(new float[] { 300 });
-            cell = new PdfPCell(new Phrase("PDF"));
-            cell.HorizontalAlignment = Element.ALIGN_CENTER;
-            cell.BackgroundColor = new BaseColor(221, 221, 221);
-            cell.FixedHeight = 45;
-            cell.PaddingTop = 15;
-            button.AddCell(cell);
-            table.AddCell(button);
+                button = new PdfPTable(1); //here used Nested Table
+                button.SetTotalWidth(new float[] { 300 });
+                cell = new PdfPCell(new Phrase("PDF"));
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell.BackgroundColor = new BaseColor(221, 221, 221);
+                cell.FixedHeight = 45;
+                cell.PaddingTop = 15;
+                button.AddCell(cell);
+                table.AddCell(button);
 
-            button = new PdfPTable(3); //here used Nested Table
-            button.SetTotalWidth(new float[] { 150, 300, 150 });
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            button.AddCell(cell);
-            cell = new PdfPCell(new Phrase("Select Location"));
-            cell.HorizontalAlignment = Element.ALIGN_CENTER;
-            cell.BackgroundColor = new BaseColor(221, 221, 221);
-            cell.FixedHeight = 45;
-            cell.PaddingTop = 7;
-            button.AddCell(cell);
-            cell = new PdfPCell(new Phrase(""));
-            cell.Border = Rectangle.NO_BORDER;
-            cell.FixedHeight = 45;
-            button.AddCell(cell);
-            table.AddCell(button);
+                button = new PdfPTable(3); //here used Nested Table
+                button.SetTotalWidth(new float[] { 150, 300, 150 });
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                button.AddCell(cell);
+                cell = new PdfPCell(new Phrase("Select Location"));
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
+                cell.BackgroundColor = new BaseColor(221, 221, 221);
+                cell.FixedHeight = 45;
+                cell.PaddingTop = 7;
+                button.AddCell(cell);
+                cell = new PdfPCell(new Phrase(""));
+                cell.Border = Rectangle.NO_BORDER;
+                cell.FixedHeight = 45;
+                button.AddCell(cell);
+                table.AddCell(button);
 
-            pdfDocument.Add(table);
-
-            pdfDocument.Close();          
+                pdfDocument.Add(table);
+                BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ITALIC, BaseFont.CP1252, false);
+                BaseColor bc = new BaseColor(0, 0, 0, 45);
+                Font times = new Font(bfTimes, 100F, Font.ITALIC, bc);
+                // Dim wfont = New Font(BaseFont.TIMES_ROMAN, 1.0F, BaseFont.COURIER, BaseColor.LIGHT_GRAY)
+                ColumnText.ShowTextAligned(writer.DirectContent, Element.ALIGN_CENTER, new Phrase("Hossain", times), 297, 550, -70);
+               //End water mark
+                pdfDocument.Close();
+            }
+            catch (Exception)
+            {
+                pdfDocument.Close();
+            }
         }
 
         private void DropDownClosed(object sender, EventArgs e)
