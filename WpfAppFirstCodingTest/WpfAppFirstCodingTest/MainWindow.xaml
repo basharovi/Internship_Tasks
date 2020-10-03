@@ -44,7 +44,7 @@
         <TextBox x:Name="UsernameTextBox" HorizontalAlignment="Left" Height="53" Margin="60,323,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="428" RenderTransformOrigin="0.484,2.348"/>
         <Label Content="Enter Username " HorizontalAlignment="Left" Margin="60,298,0,0" VerticalAlignment="Top" Width="428" Height="47"/>
         <Label Content="Enter Password " HorizontalAlignment="Left" Margin="613,298,0,0" VerticalAlignment="Top" Width="435" Height="47" Grid.ColumnSpan="3"/>
-        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="163,466,0,0" VerticalAlignment="Top" Width="214" RenderTransformOrigin="0.5,0.5" Height="81" Click="UpdateButton_Click" IsEnabled="True">
+        <Button x:Name="UpdateButton" Content="Update" HorizontalAlignment="Left" Margin="58,466,0,0" VerticalAlignment="Top" Width="214" RenderTransformOrigin="0.5,0.5" Height="81" Click="UpdateButton_Click" IsEnabled="True">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -55,9 +55,10 @@
             </Button.RenderTransform>
         </Button>
         <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="613,320,0,0" VerticalAlignment="Top" Height="56" Width="435" Grid.ColumnSpan="3"/>
-        <Button x:Name="PrintBtn" Content="PDF" HorizontalAlignment="Left" Margin="501,462,0,0" VerticalAlignment="Top" Width="256" Height="83" Click="PrintBtn_Click" Grid.ColumnSpan="3"  />
-        <Button x:Name="SelectLocationButton" Content="Select Location" HorizontalAlignment="Left" Margin="216,462,0,0" VerticalAlignment="Top" Width="205" Height="83" Click="SaveAsButton_Click" Grid.Column="2"/>
+        <Button x:Name="PrintBtn" Content="PDF" HorizontalAlignment="Left" Margin="327,462,0,0" VerticalAlignment="Top" Width="256" Height="83" Click="PrintBtn_Click"  />
+        <Button x:Name="SelectLocationButton" Content="Select Location" HorizontalAlignment="Left" Margin="1,462,0,0" VerticalAlignment="Top" Width="205" Height="83" Click="SaveAsButton_Click" Grid.Column="1" Grid.ColumnSpan="2"/>
         <TextBox x:Name="TextBox" Grid.Column="2" HorizontalAlignment="Left" Height="77" Margin="339,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="241"/>
+        <Button x:Name="ExcelFileButton" Content="Create Excel File" Grid.Column="2" HorizontalAlignment="Left" Margin="241,462,0,0" VerticalAlignment="Top" Width="234" Height="83" Click="ExcelFileButton_Click"/>
 
     </Grid>
 </Window>

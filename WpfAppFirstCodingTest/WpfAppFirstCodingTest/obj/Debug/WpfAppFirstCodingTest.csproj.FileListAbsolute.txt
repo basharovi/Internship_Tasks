@@ -63,3 +63,5 @@ G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debu
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\WpfAppFirstCodingTest.csproj.CopyComplete
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\WpfAppFirstCodingTest.exe
 G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\WpfAppFirstCodingTest.pdb
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\bin\Debug\ExcelLibrary.dll
+G:\_Office\Internship_Tasks\WpfAppFirstCodingTest\WpfAppFirstCodingTest\obj\Debug\WpfAppFirstCodingTest.csproj.ResolveComReference.cache
