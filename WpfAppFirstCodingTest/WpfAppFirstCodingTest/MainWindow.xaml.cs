@@ -307,7 +307,66 @@ namespace WpfAppFirstCodingTest
             return connectionString;
         }
 
-        private void ExcelFileWithDropDownButton_Click(object sender, RoutedEventArgs e)
+        private void MultipleExcelSheetButton_Click(object sender, RoutedEventArgs e)
+        {          
+                var app = new Microsoft.Office.Interop.Excel.Application();
+
+                var workbook = app.Workbooks.Add(Type.Missing);
+                // creating new Excelsheet in workbook
+                _Worksheet worksheet = null;
+
+                Sheets xlSheets = null;
+                Worksheet xlNewSheet = null;
+
+                xlSheets = workbook.Sheets as Sheets;
+
+                // see the excel sheet behind the program
+                app.Visible = true;
+
+                //Select the sheet
+                worksheet = workbook.Worksheets[1];
+                             
+            xlNewSheet = (Worksheet)xlSheets.Add(xlSheets[1], Type.Missing, Type.Missing, Type.Missing);
+          
+            xlNewSheet.Name = "MySheet1";
+
+            xlNewSheet.Cells[1, 1] = "TPR Name";
+            xlNewSheet.Cells[1, 2] = "TPR Number";
+            xlNewSheet.Cells[1, 3] = "Country";
+            xlNewSheet.Cells[1, 4] = "Diligence Level";
+            xlNewSheet.Cells[1, 5] = "Approval Status";
+            xlNewSheet.Cells[1, 6] = "Date Approved";
+            xlNewSheet.Cells[1, 7] = "Questionnaire Status";
+            xlNewSheet.Cells[1, 8] = "Training Status";
+            xlNewSheet.Cells[1, 9] = "Certification Status";
+            xlNewSheet.Cells[1, 10] = "Sponsor";
+
+            for (int i = 1; i <= 10; i++)
+            {
+                xlNewSheet.Columns[i].ColumnWidth = 20;
+            }
+
+            xlNewSheet.EnableAutoFilter = true;
+           
+            //Create the range.
+            Range range1 = xlNewSheet.get_Range("C1", "I5");
+           
+            //Auto-filter the range.
+            range1.AutoFilter("1", "<>", XlAutoFilterOperator.xlOr, "", true);
+            range1.AutoFilter("4", "<>", XlAutoFilterOperator.xlOr, "", false);                     
+            ////Auto-fit the second column.            
+            //xlNewSheet.get_Range("I1", "I5").EntireColumn.AutoFit();
+
+            xlNewSheet = (Worksheet)xlSheets.Add(xlSheets[1], Type.Missing, Type.Missing, Type.Missing);
+            xlNewSheet.Name = "MySheet2";
+       
+        }
+        private void ExcelSheetFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelFilter();     
+        }
+
+        private void ExcelFilter()
         {
             var app = new Microsoft.Office.Interop.Excel.Application();
             app.Visible = true;
@@ -318,136 +377,30 @@ namespace WpfAppFirstCodingTest
             Microsoft.Office.Interop.Excel.Worksheet sheet = (Microsoft.Office.Interop.Excel.Worksheet)objBook.Sheets["Sheet1"];
 
             //Add data into A1 and B1 Cells as headers.
-            sheet.Cells[1, 1] = "Product ID";
+            sheet.Cells[1, 1] = "TPR Name";
+            sheet.Cells[1, 2] = "TPR Number";
+            sheet.Cells[1, 3] = "Country";
+            sheet.Cells[1, 4] = "Diligence Level";
+            sheet.Cells[1, 5] = "Approval Status";
+            sheet.Cells[1, 6] = "Date Approved";
+            sheet.Cells[1, 7] = "Questionnaire Status";
+            sheet.Cells[1, 8] = "Training Status";
+            sheet.Cells[1, 9] = "Certification Status";
+            sheet.Cells[1,10] = "Sponsor";
 
-            sheet.Cells[1, 2] = "Product Name";
-
-            //Add data into details cells.
-            //sheet.Cells[2, 1] = 1;
-            //Enable Auto-filter.           
+            for (int i = 1; i <= 10; i++)
+            {
+                sheet.Columns[i].ColumnWidth = 20;
+            }
             sheet.EnableAutoFilter = true;
-            ////Create the range.
-            Microsoft.Office.Interop.Excel.Range range = sheet.get_Range("A1", "B5");
-
-            ////Auto-filter the range.
+            //Create the range.
+            Microsoft.Office.Interop.Excel.Range range = sheet.get_Range("A1", "J5");
+            //Auto-filter the range.
             range.AutoFilter("1", "<>", Microsoft.Office.Interop.Excel.XlAutoFilterOperator.xlOr, "", true);
-
-            ////Auto-fit the second column.
-            sheet.get_Range("B1", "B5").EntireColumn.AutoFit();
-            sheet.get_Range("C1", "C5").EntireColumn.AutoFit();
-
-
-            //            var workbook = app.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
-            //            var workSheet = workbook.Worksheets[1];
-            //            // workSheet = workbook.Worksheets[2];
-
-            //            for(int i = 1; i<=8; i++)
-            //            {
-            //                workSheet.Columns[i].ColumnWidth = 22;
-            //            }
-            //            workSheet.Range["A1"].Value = "Enter Server Name:";
-            //            workSheet.Range["A3"].Value = "Authentication type";
-
-            //            var list = new List<string>();
-            //            list.Add("Windows Authentication");
-            //            list.Add("SQL Server Authentication");
-            //            var flatList = string.Join(",", list);
-
-            //            var cell = (Range)workSheet.Cells[4,4];
-            //            cell.Validation.Delete();
-            //            cell.Validation.Add(
-            //               XlDVType.xlValidateList,
-            //               XlDVAlertStyle.xlValidAlertInformation,
-            //               XlFormatConditionOperator.xlBetween,
-            //               flatList,
-            //               Type.Missing);
-            //            cell.Value = list[0];
-            //            cell.Validation.IgnoreBlank = true;           
-            //            cell.Validation.InCellDropdown = true;
-
-            //            workSheet.Range["B3"].Value = "Enter database Name:";
-            //            workSheet.Range["A6"].Value = "UserName:";
-            //            workSheet.Range["B6"].Value = "Password:";
-            //-----------------------------------------------------------------------
-            // creating Excel Application
-
-            //try
-            //{
-            //    var app = new Microsoft.Office.Interop.Excel.Application();
-            //// creating new WorkBook within Excel application
-            //var workbook = app.Workbooks.Add(Type.Missing);
-            //    // creating new Excelsheet in workbook
-            //    _Worksheet worksheet = null;
-
-            //Sheets xlSheets = null;
-            //Worksheet xlNewSheet = null;
-
-
-            //xlSheets = workbook.Sheets as Sheets;
-
-            //    // see the excel sheet behind the program
-            //    app.Visible = true;
-
-            //    //Select the sheet
-            //    worksheet = workbook.Worksheets[1];
-
-            //    for (int i = 0; i < 10; i++)
-            //    {
-            //        xlNewSheet = (Worksheet)xlSheets.Add(xlSheets[1], Type.Missing, Type.Missing, Type.Missing);
-            //        xlNewSheet.Name = $"MySheet {i}";
-            //    }
-
-            //    // save the application
-            //    workbook.SaveAs("c:\\output.xls", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
-            //    // Exit from the application
-
-            //    app.Quit();
-
-        }                         
-
-        private void ExcelSheetFilterButton_Click(object sender, RoutedEventArgs e)
-        {
-            ExcelFilter();
-            MessageBox.Show("File created on this 'G:\\_Office\\Internship_Tasks' path");
+            //Auto-fit the second column.
+            sheet.get_Range("J1", "J5").EntireColumn.AutoFit();
         }
-
-        private void ExcelFilter()
-        {
-            var spreadSheet = new SLDocument();
-            var spreadSheet2 = new SLDocument();
-            filePath = @"G:\_Office\Internship_Tasks\Thermon.xlsx";
-            if (File.Exists(filePath))
-            {
-                File.Delete(filePath);
-            }
-
-            spreadSheet.SetCellValue(1, 1, "TPR Name ");
-            spreadSheet.SetCellValue(1, 2, "TPR Number ");
-            spreadSheet.SetCellValue(1, 3, "Country      .");
-            spreadSheet.SetCellValue(1, 4, "Diligence Level      .");
-            spreadSheet.SetCellValue(1, 5, "Approval Status      .");
-            spreadSheet.SetCellValue(1, 6, "Data Approved      .");
-            spreadSheet.SetCellValue(1, 7, "Questionnaire Status      .");
-            spreadSheet.SetCellValue(1, 8, "Training Status      .");
-            spreadSheet.SetCellValue(1, 9, "Certification Status      .");
-            spreadSheet.SetCellValue(1, 10, "Sponsor");
-            spreadSheet.AutoFitColumn(1, 10);
-
-            for (int i = 2; i <= 300; i++)
-            {
-                if (i % 2 == 0)
-                {
-                    spreadSheet.SetCellValue(i, 5, "Approved");
-                }
-                else
-                    spreadSheet.SetCellValue(i, 5, "Not Approved");
-            }
-
-            spreadSheet.Filter("C1", "I1");
-
-            spreadSheet.SaveAs(filePath);
-            spreadSheet2.SaveAs(filePath);
-        }
+       
     }
 }
 
