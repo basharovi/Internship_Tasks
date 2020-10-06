@@ -8,11 +8,9 @@ using System.IO;
 using System.Diagnostics;
 using WinForms = System.Windows.Forms;
 using System.Configuration;
-using Image = System.Windows.Controls.Image;
 using Microsoft.Office.Interop.Excel;
 using System.Collections.Generic;
-
-
+using SpreadsheetLight;
 
 namespace WpfAppFirstCodingTest
 {
@@ -98,7 +96,6 @@ namespace WpfAppFirstCodingTest
             }
 
         }
-
         string filePath = string.Empty;
         //private object ExcelVersion;
 
@@ -308,7 +305,7 @@ namespace WpfAppFirstCodingTest
             return conncetionString;
         }
 
-        private void ExcelFileButton_Click(object sender, RoutedEventArgs e)
+        private void ExcelFileWithDropDownButton_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
             app.Visible = true;
@@ -346,6 +343,48 @@ namespace WpfAppFirstCodingTest
             workSheet.Range["A6"].Value = "UserName:";
             workSheet.Range["B6"].Value = "Password:";       
                        
+        }
+
+        private void ExcelSheetFilterButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelFilter();
+            MessageBox.Show("File created on this 'G:\\_Office\\Internship_Tasks' path");
+        }
+
+        private void ExcelFilter()
+        {
+            SLDocument spreadSheet = new SLDocument();
+            string filePath = @"G:\_Office\Internship_Tasks\Thermon.xlsx";
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            spreadSheet.SetCellValue(1, 1, "TPR Name ");
+            spreadSheet.SetCellValue(1, 2, "TPR Number ");
+            spreadSheet.SetCellValue(1, 3, "Country      .");
+            spreadSheet.SetCellValue(1, 4, "Diligence Level      .");
+            spreadSheet.SetCellValue(1, 5, "Approval Status      .");
+            spreadSheet.SetCellValue(1, 6, "Data Approved      .");
+            spreadSheet.SetCellValue(1, 7, "Questionnaire Status      .");
+            spreadSheet.SetCellValue(1, 8, "Training Status      .");
+            spreadSheet.SetCellValue(1, 9, "Certification Status      .");
+            spreadSheet.SetCellValue(1, 10, "Sponsor");
+            spreadSheet.AutoFitColumn(1, 10);
+
+            for (int i = 2; i <= 300; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    spreadSheet.SetCellValue(i, 5, "Approved");
+                }
+                else
+                    spreadSheet.SetCellValue(i, 5, "Not Approved");
+            }
+
+            spreadSheet.Filter("C1", "I1");
+
+            spreadSheet.SaveAs(filePath);
         }
     }
 }
