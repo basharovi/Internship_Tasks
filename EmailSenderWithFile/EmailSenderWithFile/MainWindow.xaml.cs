@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace EmailSenderWithFile
 {
@@ -22,6 +16,8 @@ namespace EmailSenderWithFile
     /// </summary>
     public partial class MainWindow : Window
     {
+        private LinkedResource inline;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +27,18 @@ namespace EmailSenderWithFile
         {
             try
             {
-                MailMessage mail = new MailMessage();
+                var linkedResource = new LinkedResource(@"C:\Users\Hossain\Downloads\Download\MailLogo.png", MediaTypeNames.Image.Jpeg);
+                // this task also can be done by aspose reference/pakage.              
+                //var htmlBody = $"{bodyTextBox.Text}<img height = 100px width = 100px src=\"cid:{linkedResource.ContentId}\"/>";
+                var htmlBody = "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print <a href='https://www.google.com/' target='_blank'> Google </a>, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.";
+               // htmlBody = $"<img height = 100px width = 100px src=\"cid:{linkedResource.ContentId}\"/>";
+                var alternateView = AlternateView.CreateAlternateViewFromString(htmlBody, null, MediaTypeNames.Text.Html);
+                alternateView.LinkedResources.Add(linkedResource);
+                var mail = new MailMessage()
+                {
+                    AlternateViews = { alternateView }
+                };
+             
                 mail.From = new MailAddress("hossainahmed162012@gmail.com");
                 SmtpClient smtp = new SmtpClient();
                 smtp.Port = 587;
@@ -47,23 +54,10 @@ namespace EmailSenderWithFile
                 mail.IsBodyHtml = true;
 
                 mail.Subject = subjectTextBox.Text;
-                Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-                dlg.FileName = "Document";
-                dlg.DefaultExt = ".txt";
-                dlg.Filter = "Text documents (.txt)|*.*";
-
-                Nullable<bool> result = dlg.ShowDialog();
-
-                if (result == true)
-                {
-                    attachmentTextBox.Text = dlg.FileName;
-
-                    mail.Attachments.Add(new Attachment(attachmentTextBox.Text));
-                }
-                mail.Body = bodyTextBox.Text;
+                
                 smtp.Send(mail);
 
-                MessageBox.Show("Your Mail is sended");
+                MessageBox.Show("Your Mail sent");
             }
             catch (Exception ex)
             {
