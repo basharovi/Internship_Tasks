@@ -7,7 +7,10 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.Collections.Specialized;
+using MailBee;
+using MailBee.SmtpMail;
+using MailBee.ImapMail;
 
 namespace EmailSenderWithFile
 {
@@ -25,45 +28,27 @@ namespace EmailSenderWithFile
     
        private void sendButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                var linkedResource = new LinkedResource(@"C:\Users\Hossain\Downloads\Download\MailLogo.png", MediaTypeNames.Image.Jpeg);
-                // this task also can be done by aspose reference/pakage.              
-                //var htmlBody = $"{bodyTextBox.Text}<img height = 100px width = 100px src=\"cid:{linkedResource.ContentId}\"/>";
-                var htmlBody = "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print <a href='https://www.google.com/' target='_blank'> Google </a>, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.";
-               // htmlBody = $"<img height = 100px width = 100px src=\"cid:{linkedResource.ContentId}\"/>";
-                var alternateView = AlternateView.CreateAlternateViewFromString(htmlBody, null, MediaTypeNames.Text.Html);
-                alternateView.LinkedResources.Add(linkedResource);
-                var mail = new MailMessage()
-                {
-                    AlternateViews = { alternateView }
-                };
-             
-                mail.From = new MailAddress("hossainahmed162012@gmail.com");
-                SmtpClient smtp = new SmtpClient();
-                smtp.Port = 587;
-                smtp.EnableSsl = true;
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new NetworkCredential(mail.From.Address, "@hossain@");
-                smtp.Host = "smtp.gmail.com";
+            var imapComponent = new Imap("MN120-35FDFD54FDFEFD4FFD565FC6E013-CF63");
+            Smtp mailer = new Smtp();
 
-                //recipient
-                mail.To.Add(new MailAddress(toMailTextBox.Text));
+            // Use SMTP relay with authentication.
+            SmtpServer server = mailer.SmtpServers.Add(
+                "mail.perkyrabbit.com", "hossain@perkyrabbit.com", "01779432824@@");
 
-                mail.IsBodyHtml = true;
+            // Use alternate SMTP port.
+            server.Port = 587;
 
-                mail.Subject = subjectTextBox.Text;
-                
-                smtp.Send(mail);
+            mailer.SmtpServers.Add(server);
 
-                MessageBox.Show("Your Mail sent");
-            }
-            catch (Exception ex)
-            {
+            
 
-                MessageBox.Show(ex.Message);
-            }
+            // Compose and send simple e-mail.
+            mailer.From.Email = "hossain@perkyrabbit.com";
+            mailer.To.Add("ovi@perkyrabbit.com");
+            mailer.Subject = "Test message";
+            mailer.BodyPlainText = "testing mail from web mail";
+            mailer.Send();
+            MessageBox.Show("sent");
         }
 
         private void AttachmentButton_Click(object sender, RoutedEventArgs e)

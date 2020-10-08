@@ -13,3 +13,6 @@ G:\_Office\Internship_Tasks\EmailSenderWithFile\EmailSenderWithFile\obj\Debug\Em
 G:\_Office\Internship_Tasks\EmailSenderWithFile\EmailSenderWithFile\obj\Debug\EmailSenderWithFile.csproj.CoreCompileInputs.cache
 G:\_Office\Internship_Tasks\EmailSenderWithFile\EmailSenderWithFile\obj\Debug\EmailSenderWithFile.exe
 G:\_Office\Internship_Tasks\EmailSenderWithFile\EmailSenderWithFile\obj\Debug\EmailSenderWithFile.pdb
+G:\_Office\Internship_Tasks\EmailSenderWithFile\EmailSenderWithFile\bin\Debug\MailBee.NET.dll
+G:\_Office\Internship_Tasks\EmailSenderWithFile\EmailSenderWithFile\bin\Debug\MailBee.NET.xml
+G:\_Office\Internship_Tasks\EmailSenderWithFile\EmailSenderWithFile\obj\Debug\EmailSenderWithFile.csproj.CopyComplete
