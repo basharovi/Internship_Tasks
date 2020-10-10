@@ -341,15 +341,18 @@ namespace WpfAppFirstCodingTest
             xlNewSheet.Cells[1, 9] = "Certification Status";
             xlNewSheet.Cells[1, 10] = "Sponsor";
 
-            for (int i = 1; i <= 10; i++)
-            {
-                xlNewSheet.Columns[i].ColumnWidth = 20;
-            }
+            //for (int i = 1; i <= 10; i++)
+            //{
+            //    xlNewSheet.Columns[i].ColumnWidth = 20;
+            //}
+
+            xlNewSheet.Columns.AutoFit();
+            
 
             xlNewSheet.EnableAutoFilter = true;
            
             //Create the range.
-            Range range1 = xlNewSheet.get_Range("C1", "I5");
+            var range1 = xlNewSheet.get_Range("C1", "I5");
            
             //Auto-filter the range.
             range1.AutoFilter("1", "<>", XlAutoFilterOperator.xlOr, "", true);
