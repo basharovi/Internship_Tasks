@@ -3,14 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Net.Mime;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Collections.Specialized;
-using MailBee;
-using MailBee.SmtpMail;
-using MailBee.ImapMail;
 
 namespace EmailSenderWithFile
 {
@@ -19,41 +12,51 @@ namespace EmailSenderWithFile
     /// </summary>
     public partial class MainWindow : Window
     {
-        private LinkedResource inline;
-
+       
         public MainWindow()
         {
             InitializeComponent();
         }
-    
-       private void sendButton_Click(object sender, RoutedEventArgs e)
+
+        private void sendButton_Click(object sender, RoutedEventArgs e)
         {
-            var imapComponent = new Imap("MN120-35FDFD54FDFEFD4FFD565FC6E013-CF63");
-            Smtp mailer = new Smtp();
+            //DESKTOP-AUDNFC2
+            //192.168.1.136
 
-            // Use SMTP relay with authentication.
-            SmtpServer server = mailer.SmtpServers.Add(
-                "mail.perkyrabbit.com", "hossain@perkyrabbit.com", "01779432824@@");
+            // = (Dns.GetHostName());
+        
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("hossain@perkyrabbit.com");
+                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
+                smtp.Host = "mail.perkyrabbit.com";
+                smtp.Port = 25;
+                smtp.EnableSsl = false;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new NetworkCredential("hossain@perkyrabbit.com", "01779432824@@");             
+          
+                mail.To.Add(new MailAddress("ovi@perkyrabbit.com"));
 
-            // Use alternate SMTP port.
-            server.Port = 587;
+                mail.IsBodyHtml = true;
+                mail.Subject = subjectTextBox.Text;              
+                mail.Body = bodyTextBox.Text;
+                smtp.Send(mail);
 
-            mailer.SmtpServers.Add(server);
+                MessageBox.Show("Your Mail Sent!!!!!");
+            }
+            catch (Exception ex)
+            {
 
-            
+                MessageBox.Show(ex.Message);
+            }
 
-            // Compose and send simple e-mail.
-            mailer.From.Email = "hossain@perkyrabbit.com";
-            mailer.To.Add("ovi@perkyrabbit.com");
-            mailer.Subject = "Test message";
-            mailer.BodyPlainText = "testing mail from web mail";
-            mailer.Send();
-            MessageBox.Show("sent");
         }
 
         private void AttachmentButton_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
     }
 }
