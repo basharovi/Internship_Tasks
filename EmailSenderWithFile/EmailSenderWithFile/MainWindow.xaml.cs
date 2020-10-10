@@ -7,9 +7,6 @@ using System.Windows;
 
 namespace EmailSenderWithFile
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
        
@@ -20,16 +17,12 @@ namespace EmailSenderWithFile
 
         private void sendButton_Click(object sender, RoutedEventArgs e)
         {
-            //DESKTOP-AUDNFC2
-            //192.168.1.136
-
-            // = (Dns.GetHostName());
-        
+                 
             try
             {
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress("hossain@perkyrabbit.com");
-                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient();
+                SmtpClient smtp = new SmtpClient();
                 smtp.Host = "mail.perkyrabbit.com";
                 smtp.Port = 25;
                 smtp.EnableSsl = false;
